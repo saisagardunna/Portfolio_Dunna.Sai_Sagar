@@ -4,6 +4,7 @@ import MiniCssExtractPlugin from "mini-css-extract-plugin";
 import FaviconsWebpackPlugin from "favicons-webpack-plugin";
 import { BundleAnalyzerPlugin } from "webpack-bundle-analyzer";
 import crypto from "crypto";
+import Dotenv from "dotenv-webpack";
 const SVGIdPlugin = require("./webpack/svg-id-plugin.js");
 
 function hash(string) {
@@ -22,11 +23,11 @@ export default (_, { analyze }) => {
     devtool: isDevelopment ? "eval-source-map" : "source-map",
     cache: isDevelopment
       ? {
-          type: "filesystem",
-          buildDependencies: {
-            config: [__filename],
-          },
-        }
+        type: "filesystem",
+        buildDependencies: {
+          config: [__filename],
+        },
+      }
       : false,
     devServer: {
       host: "0.0.0.0",
@@ -55,6 +56,14 @@ export default (_, { analyze }) => {
         filename: isDevelopment ? "styles.css" : "styles.[contenthash].css",
       }),
       new HtmlWebpackPlugin({ template: "./src/index.html" }),
+      new Dotenv({
+        path: './.env.local', // load this now instead of the ones in '.env'
+        safe: false, // load '.env.example' to verify the '.env' variables are all set. Can also be a string to a different file.
+        allowEmptyValues: true, // allow empty variables (e.g. `FOO=`) (treat it as empty string, rather than missing)
+        systemvars: true, // load all the predefined 'process.env' variables which will automatically override any local variables
+        silent: true, // hide any errors
+        defaults: false // load '.env.defaults' as the default values if empty.
+      }),
       // SVG processing: once at startup in dev, every build in production
       new SVGIdPlugin({
         files: ["src/animation/scene.svg"],
@@ -70,42 +79,42 @@ export default (_, { analyze }) => {
       splitChunks: isDevelopment
         ? false
         : {
-            chunks: "all",
-            cacheGroups: {
-              scenes: {
-                test: (module) => {
-                  const identifier = module.identifier();
-                  return (
-                    identifier.includes("scene.svg") ||
-                    identifier.includes("scene-simplified.svg")
-                  );
-                },
-                name(module) {
-                  const moduleFolder = module
-                    .identifier()
-                    .split("/")
-                    .slice(1, -1)
-                    .pop();
+          chunks: "all",
+          cacheGroups: {
+            scenes: {
+              test: (module) => {
+                const identifier = module.identifier();
+                return (
+                  identifier.includes("scene.svg") ||
+                  identifier.includes("scene-simplified.svg")
+                );
+              },
+              name(module) {
+                const moduleFolder = module
+                  .identifier()
+                  .split("/")
+                  .slice(1, -1)
+                  .pop();
 
-                  return `${moduleFolder}`;
-                },
-                filename: "[name].js",
-                enforce: true,
-                chunks: "initial",
+                return `${moduleFolder}`;
               },
-              default: {
-                minChunks: 2,
-                priority: -20,
-                reuseExistingChunk: true,
-              },
-              vendor: {
-                test: /[\\/]node_modules[\\/]/,
-                name: "vendors",
-                priority: -10,
-                chunks: "all",
-              },
+              filename: "[name].js",
+              enforce: true,
+              chunks: "initial",
+            },
+            default: {
+              minChunks: 2,
+              priority: -20,
+              reuseExistingChunk: true,
+            },
+            vendor: {
+              test: /[\\/]node_modules[\\/]/,
+              name: "vendors",
+              priority: -10,
+              chunks: "all",
             },
           },
+        },
     },
     module: {
       rules: [
