@@ -10,7 +10,7 @@ const Contact = () => {
         setStatus("Sending...");
 
         const formData = new FormData(e.target);
-        formData.append("access_key", "57cdca70-c4ad-4136-973e-4bf275ddf55a");
+        formData.append("access_key", import.meta.env.VITE_WEB3FORMS_KEY || "57cdca70-c4ad-4136-973e-4bf275ddf55a");
 
         const res = await fetch("https://api.web3forms.com/submit", {
             method: "POST",
