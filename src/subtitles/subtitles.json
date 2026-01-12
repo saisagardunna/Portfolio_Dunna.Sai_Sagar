@@ -1,0 +1,152 @@
+[
+  {
+    "start": "400",
+    "end": "700",
+    "text": "My name is Sai Sagar Dunna"
+  },
+  {
+    "start": "700",
+    "end": "900",
+    "text": "I'm an Associate Software Engineer"
+  },
+  {
+    "start": "1000",
+    "end": "1200",
+    "text": "passionate about AI and full-stack development"
+  },
+  {
+    "start": "1200",
+    "end": "1400",
+    "text": "building scalable systems,"
+  },
+  {
+    "start": "1600",
+    "end": "1800",
+    "text": "and creating revenue-generating platforms."
+  },
+  {
+    "start": "2000",
+    "end": "2300",
+    "text": "Based in Hyderabad, India"
+  },
+  {
+    "start": "2400",
+    "end": "2500",
+    "text": "where innovation meets tradition"
+  },
+  {
+    "start": "2600",
+    "end": "2800",
+    "text": "I turn ideas into impactful products 🚀"
+  },
+  {
+    "start": "2900",
+    "end": "3300",
+    "text": "I've built production platforms serving real customers, from AI interview systems to business solutions"
+  },
+  {
+    "start": "3400",
+    "end": "3700",
+    "text": "Currently pursuing BTech in CSE (AI & ML) at Malla Reddy University with an 8.89 CGPA"
+  },
+  {
+    "start": "3800",
+    "end": "4000",
+    "text": "I believe in learning by building – every project teaches something new 💡"
+  },
+  {
+    "start": "4500",
+    "end": "4700",
+    "text": "My tech stack spans the full spectrum"
+  },
+  {
+    "start": "4800",
+    "end": "5100",
+    "text": "From Python with FastAPI and Flask on the backend"
+  },
+  {
+    "start": "5100",
+    "end": "5400",
+    "text": "To React with TypeScript on the frontend"
+  },
+  {
+    "start": "5400",
+    "end": "5700",
+    "text": "And AI/ML technologies including NLP, CNN, and conversational AI"
+  },
+  {
+    "start": "6500",
+    "end": "6800",
+    "text": "I've built a startup business platform with 10+ customers and 100+ orders delivered"
+  },
+  {
+    "start": "6800",
+    "end": "7000",
+    "text": "generating real revenue and solving real problems"
+  },
+  {
+    "start": "7000",
+    "end": "7300",
+    "text": "Created an AI mock interview platform helping people prepare for their dream jobs"
+  },
+  {
+    "start": "7300",
+    "end": "7600",
+    "text": "Built a skin cancer detection system with 92% accuracy potentially saving lives 🏥"
+  },
+  {
+    "start": "7600",
+    "end": "7900",
+    "text": "Automated workflows handling 1000+ monthly messages across multiple platforms"
+  },
+  {
+    "start": "7900",
+    "end": "8000",
+    "text": "Each project is a step toward making technology more accessible and helpful"
+  },
+  {
+    "start": "8000",
+    "end": "8600",
+    "text": "The journey from curiosity to creation isn't always straightforward. Sometimes you're debugging at 2 AM, wondering if it'll ever work.",
+    "position": {
+      "portrait": "bottom",
+      "landscape": "bottom"
+    }
+  },
+  {
+    "start": "8600",
+    "end": "9200",
+    "text": "But that's when the magic happens. Every error message is a lesson. Every successful deployment is a victory. And slowly, you're not just writing code—you're solving real problems.",
+    "position": {
+      "portrait": "bottom",
+      "landscape": "bottom"
+    }
+  },
+  {
+    "start": "9200",
+    "end": "10400",
+    "text": "Keep building. The impact is worth it. 💫",
+    "position": {
+      "portrait": "bottom",
+      "landscape": "bottom"
+    }
+  },
+  {
+    "start": "11100",
+    "end": "11800",
+    "text": "I used to think great engineers just ship code.",
+    "position": {
+      "portrait": "bottom",
+      "landscape": "bottom"
+    }
+  },
+  {
+    "start": "11800",
+    "end": "13000",
+    "text": "Now I know they ship solutions that make lives better. 🌟",
+    "position": {
+      "portrait": "bottom",
+      "landscape": "bottom"
+    }
+  }
+]
