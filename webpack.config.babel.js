@@ -5,6 +5,7 @@ import FaviconsWebpackPlugin from "favicons-webpack-plugin";
 import { BundleAnalyzerPlugin } from "webpack-bundle-analyzer";
 import crypto from "crypto";
 import Dotenv from "dotenv-webpack";
+import CopyWebpackPlugin from "copy-webpack-plugin";
 const SVGIdPlugin = require("./webpack/svg-id-plugin.js");
 
 function hash(string) {
@@ -54,6 +55,9 @@ export default (_, { analyze }) => {
     plugins: [
       new MiniCssExtractPlugin({
         filename: isDevelopment ? "styles.css" : "styles.[contenthash].css",
+      }),
+      new CopyWebpackPlugin({
+        patterns: [{ from: "static", to: "." }],
       }),
       new HtmlWebpackPlugin({ template: "./src/index.html" }),
       new Dotenv({
