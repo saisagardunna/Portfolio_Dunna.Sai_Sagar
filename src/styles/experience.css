@@ -1,0 +1,40 @@
+.experience-container {
+    width: 100%;
+    padding: 50px 0;
+    overflow: hidden;
+}
+
+.vertical-timeline-element-title {
+    color: #fff !important;
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.vertical-timeline-element-subtitle {
+    color: #ccc !important;
+    font-size: 1rem;
+    font-style: italic;
+}
+
+.vertical-timeline-element-description {
+    color: #ddd !important;
+}
+
+/* Customizing the line color */
+.vertical-timeline::before {
+    background: rgba(255, 255, 255, 0.2) !important;
+}
+
+/* Enhancing the glassmorphism card */
+.vertical-timeline-element-content {
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1) !important;
+    border-radius: 16px !important;
+}
+
+.vertical-timeline-element-content:hover {
+    transform: scale(1.02);
+    transition: all 0.3s ease-in-out;
+    background: rgba(255, 255, 255, 0.1) !important;
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37) !important;
+}

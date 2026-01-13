@@ -1,11 +1,12 @@
 
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import '../styles/projects.css';
 
 const projects = [
     {
         title: "Startup Business Platform – Revenue Generating",
         tech: ["React", "TypeScript"],
+        category: "Web Dev",
         link: "https://moores.vercel.app",
         description: [
             "Developed production platform serving 10+ customers with 100+ orders delivered, generating consistent revenue",
@@ -16,6 +17,7 @@ const projects = [
     {
         title: "AI Mock Interview Platform",
         tech: ["FastAPI", "React", "TypeScript"],
+        category: "AI/ML",
         link: "https://ai-mock-interview-iota-wine.vercel.app",
         description: [
             "Created full-stack AI interview platform supporting voice and text interactions with 10+ active users",
@@ -26,6 +28,7 @@ const projects = [
     {
         title: "AI Resume-Based Interview Bot",
         tech: ["Python", "Streamlit", "NLP"],
+        category: "AI/ML",
         link: "https://interviewbot-e9fzdrte4s86agcbdfv2uz.streamlit.app",
         description: [
             "Designed AI interview bot extracting 15+ key data points from resumes with 90% accuracy using NLP techniques",
@@ -35,6 +38,7 @@ const projects = [
     {
         title: "AI Travel Planning Application",
         tech: ["React", "Location APIs"],
+        category: "Web Dev",
         link: "https://travel-eight-sooty.vercel.app",
         description: [
             "Engineered location-aware app generating personalized itineraries for 10+ users using proximity algorithms",
@@ -44,6 +48,7 @@ const projects = [
     {
         title: "Skin Cancer Detection System",
         tech: ["Python", "CNN", "FastAPI"],
+        category: "AI/ML",
         link: "https://github.com/saisagardunna/cancer_detection",
         linkText: "View Code",
         description: [
@@ -55,6 +60,7 @@ const projects = [
     {
         title: "Workflow Automation & Cloud Infrastructure",
         tech: ["n8n", "AWS", "Docker", "Terraform"],
+        category: "Cloud/DevOps",
         description: [
             "Automated workflows delivering 1000+ monthly messages across Twilio SMS, WhatsApp, and Telegram channels",
             "Streamlined Excel data updates reducing manual processing time by 75% through webhook integration",
@@ -64,6 +70,7 @@ const projects = [
     {
         title: "AI Recipe Generator",
         tech: ["React", "AI"],
+        category: "AI/ML",
         link: "https://recipe-generator2.vercel.app",
         description: [
             "Launched AI-powered recipe application serving 10+ users with 1.5 second average response time",
@@ -74,9 +81,25 @@ const projects = [
 
 // Extract unique skills
 const allSkills = Array.from(new Set(projects.flatMap(p => p.tech)));
+const categories = ["All", ...Array.from(new Set(projects.map(p => p.category)))];
 
 const Projects = () => {
     const cardsRef = useRef([]);
+    const [filter, setFilter] = useState("All");
+    const [visibleProjects, setVisibleProjects] = useState(projects);
+    const [animating, setAnimating] = useState(false);
+
+    useEffect(() => {
+        setAnimating(true);
+        setTimeout(() => {
+            if (filter === "All") {
+                setVisibleProjects(projects);
+            } else {
+                setVisibleProjects(projects.filter(p => p.category === filter));
+            }
+            setAnimating(false);
+        }, 300);
+    }, [filter]);
 
     useEffect(() => {
         const handleMouseMove = (e) => {
@@ -99,7 +122,7 @@ const Projects = () => {
         return () => {
             if (container) container.removeEventListener('mousemove', handleMouseMove);
         };
-    }, []);
+    }, [visibleProjects]);
 
     return (
         <div className="projects-container">
@@ -109,23 +132,31 @@ const Projects = () => {
                 demonstrating scalable engineering and innovative problem-solving.
             </p>
 
-            <div className="skills-section">
-                <div className="skills-grid">
-                    {allSkills.map((skill, index) => (
-                        <span key={index} className="skill-tag">{skill}</span>
-                    ))}
-                </div>
+            {/* Filter Buttons */}
+            <div className="filter-container">
+                {categories.map((cat, index) => (
+                    <button
+                        key={index}
+                        className={`filter-btn ${filter === cat ? 'active' : ''}`}
+                        onClick={() => setFilter(cat)}
+                    >
+                        {cat}
+                    </button>
+                ))}
             </div>
 
-            <div className="projects-grid">
-                {projects.map((project, index) => (
+            <div className={`projects-grid ${animating ? 'fade-out' : 'fade-in'}`}>
+                {visibleProjects.map((project, index) => (
                     <div
-                        key={index}
+                        key={project.title} // Use title as key for stability during filtering
                         className="project-card"
                         ref={el => cardsRef.current[index] = el}
                     >
                         <div className="project-header">
-                            <h2 className="project-title">{project.title}</h2>
+                            <div className="project-top">
+                                <h2 className="project-title">{project.title}</h2>
+                                <span className="category-badge">{project.category}</span>
+                            </div>
                             <div className="project-tech-stack">
                                 {project.tech.map((t, i) => (
                                     <span key={i} className="tech-badge">{t}</span>
@@ -147,8 +178,6 @@ const Projects = () => {
                     </div>
                 ))}
             </div>
-
-
         </div>
     );
 };

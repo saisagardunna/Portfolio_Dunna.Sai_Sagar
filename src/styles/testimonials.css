@@ -1,0 +1,138 @@
+.testimonials-section {
+    position: relative;
+    width: 100%;
+    padding: 60px 0;
+    overflow: hidden;
+}
+
+.testimonials-container {
+    display: flex;
+    overflow-x: auto;
+    gap: 30px;
+    padding: 20px 20px 40px 20px;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Hide scrollbar but keep functionality */
+.testimonials-container::-webkit-scrollbar {
+    height: 8px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 4px;
+}
+
+.testimonials-container::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 4px;
+}
+
+.testimonial-card {
+    min-width: 320px;
+    max-width: 320px;
+    background: rgba(26, 26, 26, 0.8);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    padding: 30px;
+    position: relative;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+}
+
+.testimonial-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+.quote-icon {
+    font-size: 24px;
+    margin-bottom: 20px;
+    opacity: 0.8;
+}
+
+.testimonial-text {
+    flex-grow: 1;
+    color: #e0e0e0;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin-bottom: 20px;
+    font-style: italic;
+}
+
+.testimonial-stars {
+    margin-bottom: 15px;
+    display: flex;
+    gap: 2px;
+}
+
+.testimonial-author {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-top: 20px;
+}
+
+.author-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    color: white;
+    font-size: 1.2rem;
+}
+
+.author-info h4 {
+    margin: 0;
+    font-size: 1rem;
+    color: #fff;
+}
+
+.author-info span {
+    font-size: 0.8rem;
+    color: #888;
+}
+
+/* Blur effects for smooth fade edges */
+.testimonial-blur-left,
+.testimonial-blur-right {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 100px;
+    z-index: 2;
+    pointer-events: none;
+}
+
+.testimonial-blur-left {
+    left: 0;
+    background: linear-gradient(to right, #000 0%, transparent 100%);
+}
+
+.testimonial-blur-right {
+    right: 0;
+    background: linear-gradient(to left, #000 0%, transparent 100%);
+}
+
+@media (max-width: 768px) {
+    .testimonials-container {
+        padding: 10px;
+        gap: 20px;
+    }
+
+    .testimonial-card {
+        min-width: 280px;
+    }
+
+    .testimonial-blur-left,
+    .testimonial-blur-right {
+        width: 40px;
+    }
+}

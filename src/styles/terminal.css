@@ -1,0 +1,162 @@
+/* Main Terminal Container */
+.terminal-wrapper {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 600px;
+    max-width: 90vw;
+    height: 400px;
+    background-color: rgba(10, 10, 10, 0.95);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8), 0 0 20px rgba(0, 255, 0, 0.1);
+    border-radius: 12px;
+    font-family: 'Fira Code', 'Courier New', monospace;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    z-index: 10001;
+    /* Above almost everything */
+    backdrop-filter: blur(10px);
+    animation: fadeIn 0.2s ease-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translate(-50%, -48%) scale(0.95);
+    }
+
+    to {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+    }
+}
+
+/* Header */
+.terminal-header {
+    background: linear-gradient(90deg, #1a1a1a, #111);
+    padding: 10px 15px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border-bottom: 1px solid #333;
+}
+
+.terminal-button {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+}
+
+.terminal-button.close {
+    background-color: #ff5f56;
+}
+
+.terminal-button.minimize {
+    background-color: #ffbd2e;
+}
+
+.terminal-button.maximize {
+    background-color: #27c93f;
+}
+
+.terminal-title {
+    color: #888;
+    font-size: 0.8rem;
+    margin-left: 10px;
+    flex: 1;
+    text-align: center;
+}
+
+/* Body */
+.terminal-body {
+    flex: 1;
+    padding: 15px;
+    overflow-y: auto;
+    color: #e0e0e0;
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+
+.terminal-output {
+    margin-bottom: 10px;
+    white-space: pre-wrap;
+}
+
+.command-line {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.prompt {
+    color: #27c93f;
+    /* Green prompt */
+    font-weight: bold;
+}
+
+.terminal-input {
+    background: transparent;
+    border: none;
+    color: #fff;
+    font-family: inherit;
+    font-size: inherit;
+    flex: 1;
+    outline: none;
+    caret-color: #27c93f;
+}
+
+/* Circular Toggle Button (FAB) */
+.terminal-toggle-hint {
+    position: fixed;
+    bottom: 110px;
+    /* Above Chatbot */
+    right: 30px;
+    width: 60px;
+    /* Circle Size */
+    height: 60px;
+    background: #000;
+    border: 1px solid #333;
+    border-radius: 50%;
+    /* Perfect Circle */
+    color: #27c93f;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    cursor: pointer;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+    z-index: 9999;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.terminal-toggle-hint:hover {
+    transform: scale(1.1) rotate(10deg);
+    border-color: #27c93f;
+    box-shadow: 0 0 25px rgba(39, 201, 63, 0.4);
+}
+
+.terminal-toggle-hint.open {
+    background: #222;
+    border-color: #ff5f56;
+    color: #ff5f56;
+    transform: rotate(180deg);
+}
+
+.terminal-toggle-hint.open:hover {
+    box-shadow: 0 0 25px rgba(255, 95, 86, 0.4);
+    transform: rotate(180deg) scale(1.1);
+}
+
+/* Scrollbar */
+.terminal-body::-webkit-scrollbar {
+    width: 6px;
+}
+
+.terminal-body::-webkit-scrollbar-thumb {
+    background: #333;
+    border-radius: 3px;
+}

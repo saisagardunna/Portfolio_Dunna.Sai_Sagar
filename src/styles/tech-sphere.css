@@ -1,0 +1,73 @@
+.tech-sphere-section {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    min-height: 600px;
+    padding: 60px 20px;
+    background: transparent;
+    overflow: hidden;
+    position: relative;
+    z-index: 1;
+}
+
+.tech-content {
+    flex: 1;
+    max-width: 500px;
+    padding-right: 50px;
+    text-align: left;
+    z-index: 2;
+}
+
+.tech-title {
+    font-size: 3.5rem;
+    font-weight: 800;
+    margin-bottom: 20px;
+    background: linear-gradient(135deg, #00f260 0%, #0575e6 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.tech-subtitle {
+    font-size: 1.2rem;
+    color: #ccc;
+    line-height: 1.6;
+}
+
+.tagcloud {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    letter-spacing: 1px;
+    color: #0575e6;
+    /* Base color, though TagCloud usually handles colors */
+    position: relative;
+}
+
+.tagcloud-item {
+    font-size: 1.2rem;
+    color: #fff;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.tagcloud-item:hover {
+    color: #00f260;
+}
+
+@media (max-width: 900px) {
+    .tech-sphere-section {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .tech-content {
+        padding-right: 0;
+        margin-bottom: 40px;
+        text-align: center;
+    }
+}

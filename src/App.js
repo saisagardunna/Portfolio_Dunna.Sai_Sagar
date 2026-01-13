@@ -12,6 +12,11 @@ import CircularGallery from "./components/CircularGallery";
 import ResumeViewer from "./components/ResumeViewer";
 import About from "./components/About";
 import Contact from "./components/Contact";
+import Footer from "./components/Footer";
+import ScrollProgress from "./components/ScrollProgress";
+import BackToTop from "./components/BackToTop";
+import CustomCursor from "./components/CustomCursor";
+import Terminal from "./components/Terminal";
 import "./styles/main.css";
 
 function throttle(func, wait, immediate) {
@@ -217,6 +222,8 @@ export default function App() {
 
   return (
     <>
+      <CustomCursor />
+      <ScrollProgress />
       <Navbar />
       <Routes>
         <Route path="/" element={<Home dimensions={dimensions} arrayScreens={arrayScreens} />} />
@@ -229,7 +236,7 @@ export default function App() {
               <p>Drag to explore • Click center item to view PDF</p>
             </div>
             <CircularGallery
-              bend={3}
+              bend={0}
               textColor="#ffffff"
               borderRadius={0.05}
               scrollEase={0.05}
@@ -253,6 +260,9 @@ export default function App() {
         <Route path="/resume" element={<ResumeViewer />} />
       </Routes>
       <AIAssistant />
+      <BackToTop />
+      <Terminal />
+      <Footer />
     </>
   );
 }

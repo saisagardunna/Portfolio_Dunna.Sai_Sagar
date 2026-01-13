@@ -1,5 +1,13 @@
 
 import React, { useState } from 'react';
+import Skills from './Skills';
+import Experience from './Experience';
+import Testimonials from './Testimonials';
+import WorkProcess from './WorkProcess';
+import FAQ from './FAQ';
+import Hobbies from './Hobbies';
+import FunStats from './FunStats';
+import Newsletter from './Newsletter';
 import '../styles/about-contact.css';
 
 const About = () => {
@@ -8,8 +16,11 @@ const About = () => {
             <h1 className="page-title">About Me</h1>
             <div className="about-content">
                 <div className="about-text">
+                    <h2 className="typewriter-text">
+                        Hello! I'm <strong>Sai Sagar Dunna</strong>...
+                    </h2>
                     <p>
-                        Hello! I'm <strong>Sai Sagar Dunna</strong>, an Associate Software Engineer passionate about building scalable, production-ready applications.
+                        An Associate Software Engineer passionate about building scalable, production-ready applications.
                         My journey in tech involves deep dives into <strong>Python (FastAPI, Flask)</strong> and modern <strong>React</strong> ecosystems.
                     </p>
                     <p>
@@ -21,7 +32,16 @@ const About = () => {
                         I'm always looking for the next challenge to innovate and grow.
                     </p>
                 </div>
-                <div className="about-stats">
+
+                <Skills />
+                <Experience />
+                <Testimonials />
+                <WorkProcess />
+                <FAQ />
+                <Hobbies />
+                <FunStats />
+                <Newsletter />
+                <div className="about-stats" style={{ display: 'none' }}>
                     <div className="stat-card">
                         <h3>Fresher</h3>
                         <span>Years Experience</span>

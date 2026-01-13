@@ -1,0 +1,108 @@
+.newsletter-section {
+    padding: 100px 20px;
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+.newsletter-content {
+    max-width: 600px;
+    margin: 0 auto;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.01) 100%);
+    padding: 50px 30px;
+    border-radius: 24px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    text-align: center;
+    position: relative;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+}
+
+.newsletter-icon {
+    font-size: 2.5rem;
+    color: #a855f7;
+    margin-bottom: 20px;
+}
+
+.newsletter-content h2 {
+    font-size: 2rem;
+    color: #fff;
+    margin-bottom: 10px;
+    font-weight: 800;
+}
+
+.newsletter-content p {
+    color: #aaa;
+    margin-bottom: 30px;
+    font-size: 1rem;
+}
+
+.newsletter-form {
+    display: flex;
+    gap: 10px;
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.newsletter-form input {
+    flex: 1;
+    padding: 15px 20px;
+    border-radius: 50px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(0, 0, 0, 0.3);
+    color: #fff;
+    font-size: 1rem;
+    outline: none;
+    transition: all 0.3s;
+}
+
+.newsletter-form input:focus {
+    border-color: #a855f7;
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.newsletter-form button {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: none;
+    background: linear-gradient(135deg, #a855f7 0%, #6366f1 100%);
+    color: #fff;
+    font-size: 1.2rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s;
+}
+
+.newsletter-form button:hover:not(:disabled) {
+    transform: scale(1.1) rotate(10deg);
+}
+
+.newsletter-form button:disabled {
+    opacity: 0.7;
+    cursor: default;
+}
+
+.newsletter-success {
+    margin-top: 15px;
+    color: #4ade80;
+    font-weight: 500;
+}
+
+@media (max-width: 600px) {
+    .newsletter-form {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .newsletter-form input {
+        width: 100%;
+    }
+
+    .newsletter-form button {
+        width: 100%;
+        border-radius: 50px;
+    }
+}

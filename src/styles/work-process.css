@@ -1,0 +1,98 @@
+.process-section {
+    padding: 80px 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.process-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 40px;
+    position: relative;
+}
+
+.process-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+}
+
+.process-icon-wrapper {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    border: 2px dashed #444;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 25px;
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.process-card:hover .process-icon-wrapper {
+    transform: scale(1.1) rotate(5deg);
+    border-style: solid;
+}
+
+.process-icon {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    color: #fff;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+}
+
+.process-number {
+    position: absolute;
+    top: 0;
+    right: -10px;
+    font-weight: 900;
+    font-size: 1.2rem;
+    background: #111;
+    padding: 2px 8px;
+    border-radius: 10px;
+}
+
+.process-title {
+    color: #fff;
+    font-size: 1.4rem;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+.process-desc {
+    color: #bbb;
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
+/* Connector Line (Desktop Only) */
+@media (min-width: 900px) {
+    .process-connector {
+        position: absolute;
+        top: 50px;
+        right: -50%;
+        width: 100%;
+        height: 2px;
+        background: linear-gradient(90deg, #333 0%, #333 50%, transparent 100%);
+        z-index: -1;
+    }
+}
+
+@media (max-width: 900px) {
+    .process-connector {
+        display: none;
+    }
+
+    .process-grid {
+        gap: 60px;
+    }
+}
