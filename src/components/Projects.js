@@ -76,6 +76,26 @@ const projects = [
             "Launched AI-powered recipe application serving 10+ users with 1.5 second average response time",
             "Delivered structured cooking instructions with 95% user satisfaction through prompt-driven logic"
         ]
+    },
+    {
+        title: "Seadra Assistant",
+        tech: ["React", "AI Integration"],
+        category: "Web Dev",
+        link: "https://seadra-assistant.lovable.app/",
+        description: [
+            "Developed an intelligent cooking assistant specialized in seafood recipes and preparation techniques",
+            "Implemented interactive step-by-step instructions improving user cooking experience"
+        ]
+    },
+    {
+        title: "Fury Fighters",
+        tech: ["React", "Gesture Recognition", "3D"],
+        category: "AI/ML",
+        link: "https://v0-gesture-controlled-fighting-game.vercel.app/",
+        description: [
+            "Created an innovative browser-based fighting game controlled via webcam hand gestures",
+            "Implemented real-time motion tracking to map physical punches and blocks to in-game actions"
+        ]
     }
 ];
 

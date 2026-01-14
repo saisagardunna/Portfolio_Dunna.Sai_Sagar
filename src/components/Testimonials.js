@@ -4,7 +4,7 @@ import '../styles/testimonials.css';
 
 const testimonialsData = [
     {
-        name: "Dr. N. S. Gowri Ganesh",
+        name: "Dr.VSK ",
         role: "Dean, Malla Reddy University",
         text: "Sai Sagar is an exceptional student who consistently goes above and beyond in his understanding of AI and Machine Learning. His ability to apply theoretical concepts to build practical applications like the Skin Cancer Detection System is impressive.",
         stars: 5,
