@@ -180,3 +180,4 @@
     background: rgba(255, 255, 255, 0.1);
     border-radius: 2px;
 }
+.ai-fab.listening { background: linear-gradient(135deg, #ef4444 0%, #f97316 100%); } .pulse-ring { position: absolute; width: 100%; height: 100%; border-radius: 50%; border: 3px solid #ef4444; animation: ping 1.5s cubic-bezier(0, 0, 0.2, 1) infinite; } @keyframes ping { 75%, 100% { transform: scale(1.6); opacity: 0; } } .ai-status-dot.active-voice { background: #ef4444; box-shadow: 0 0 10px #ef4444; animation: blink 1s infinite; } @keyframes blink { 50% { opacity: 0.5; } }

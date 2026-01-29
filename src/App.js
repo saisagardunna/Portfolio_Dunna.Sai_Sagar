@@ -17,6 +17,7 @@ import ScrollProgress from "./components/ScrollProgress";
 import BackToTop from "./components/BackToTop";
 import CustomCursor from "./components/CustomCursor";
 import Terminal from "./components/Terminal";
+import TelegramNavigationListener from "./components/TelegramNavigationListener";
 import "./styles/main.css";
 
 function throttle(func, wait, immediate) {
@@ -225,6 +226,7 @@ export default function App() {
       <CustomCursor />
       <ScrollProgress />
       <Navbar />
+      <TelegramNavigationListener />
       <Routes>
         <Route path="/" element={<Home dimensions={dimensions} arrayScreens={arrayScreens} />} />
         <Route path="/projects" element={<Projects />} />

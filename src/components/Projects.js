@@ -1,113 +1,64 @@
 
 import React, { useEffect, useRef, useState } from 'react';
 import '../styles/projects.css';
+import { supabase } from '../utils/supabaseClient';
 
-const projects = [
-    {
-        title: "Startup Business Platform – Revenue Generating",
-        tech: ["React", "TypeScript"],
-        category: "Web Dev",
-        link: "https://moores.vercel.app",
-        description: [
-            "Developed production platform serving 10+ customers with 100+ orders delivered, generating consistent revenue",
-            "Engineered comprehensive business rules and order workflows reducing processing time by 40%",
-            "Architected scalable React codebase with TypeScript achieving 99% uptime across 500+ user sessions"
-        ]
-    },
-    {
-        title: "AI Mock Interview Platform",
-        tech: ["FastAPI", "React", "TypeScript"],
-        category: "AI/ML",
-        link: "https://ai-mock-interview-iota-wine.vercel.app",
-        description: [
-            "Created full-stack AI interview platform supporting voice and text interactions with 10+ active users",
-            "Integrated conversational AI logic generating 50+ adaptive follow-up questions per interview session",
-            "Developed FastAPI backend handling 200+ API requests daily with 250ms average response time"
-        ]
-    },
-    {
-        title: "AI Resume-Based Interview Bot",
-        tech: ["Python", "Streamlit", "NLP"],
-        category: "AI/ML",
-        link: "https://interviewbot-e9fzdrte4s86agcbdfv2uz.streamlit.app",
-        description: [
-            "Designed AI interview bot extracting 15+ key data points from resumes with 90% accuracy using NLP techniques",
-            "Generated 30+ role-relevant technical and behavioral questions through advanced prompt engineering"
-        ]
-    },
-    {
-        title: "AI Travel Planning Application",
-        tech: ["React", "Location APIs"],
-        category: "Web Dev",
-        link: "https://travel-eight-sooty.vercel.app",
-        description: [
-            "Engineered location-aware app generating personalized itineraries for 10+ users using proximity algorithms",
-            "Optimized visit routing reducing travel time by 30% through intelligent scheduling of 8+ daily attractions"
-        ]
-    },
-    {
-        title: "Skin Cancer Detection System",
-        tech: ["Python", "CNN", "FastAPI"],
-        category: "AI/ML",
-        link: "https://github.com/saisagardunna/cancer_detection",
-        linkText: "View Code",
-        description: [
-            "Trained deep learning CNN model on 8000+ medical images achieving 92% classification accuracy",
-            "Designed preprocessing pipelines processing images in under 2 seconds for real-time diagnosis",
-            "Deployed FastAPI service with modular architecture handling 50+ daily inference requests"
-        ]
-    },
-    {
-        title: "Workflow Automation & Cloud Infrastructure",
-        tech: ["n8n", "AWS", "Docker", "Terraform"],
-        category: "Cloud/DevOps",
-        description: [
-            "Automated workflows delivering 1000+ monthly messages across Twilio SMS, WhatsApp, and Telegram channels",
-            "Streamlined Excel data updates reducing manual processing time by 75% through webhook integration",
-            "Provisioned cloud infrastructure managing 5+ AWS EC2 instances and 10+ Docker containers using Terraform"
-        ]
-    },
-    {
-        title: "AI Recipe Generator",
-        tech: ["React", "AI"],
-        category: "AI/ML",
-        link: "https://recipe-generator2.vercel.app",
-        description: [
-            "Launched AI-powered recipe application serving 10+ users with 1.5 second average response time",
-            "Delivered structured cooking instructions with 95% user satisfaction through prompt-driven logic"
-        ]
-    },
-    {
-        title: "Seadra Assistant",
-        tech: ["React", "AI Integration"],
-        category: "Web Dev",
-        link: "https://seadra-assistant.lovable.app/",
-        description: [
-            "Developed an intelligent cooking assistant specialized in seafood recipes and preparation techniques",
-            "Implemented interactive step-by-step instructions improving user cooking experience"
-        ]
-    },
-    {
-        title: "Fury Fighters",
-        tech: ["React", "Gesture Recognition", "3D"],
-        category: "AI/ML",
-        link: "https://v0-gesture-controlled-fighting-game.vercel.app/",
-        description: [
-            "Created an innovative browser-based fighting game controlled via webcam hand gestures",
-            "Implemented real-time motion tracking to map physical punches and blocks to in-game actions"
-        ]
+// Load projects from Supabase instead of JSON
+export const loadProjects = async () => {
+    try {
+        const { data, error } = await supabase
+            .from('projects')
+            .select('*')
+            .eq('is_active', true)
+            .order('id');
+
+        if (error) throw error;
+        return data || [];
+    } catch (error) {
+        console.error('Error loading projects:', error);
+        return [];
     }
-];
-
-// Extract unique skills
-const allSkills = Array.from(new Set(projects.flatMap(p => p.tech)));
-const categories = ["All", ...Array.from(new Set(projects.map(p => p.category)))];
+};
 
 const Projects = () => {
     const cardsRef = useRef([]);
     const [filter, setFilter] = useState("All");
-    const [visibleProjects, setVisibleProjects] = useState(projects);
+    const [projects, setProjects] = useState([]);
+    const [visibleProjects, setVisibleProjects] = useState([]);
     const [animating, setAnimating] = useState(false);
+    const [loading, setLoading] = useState(true);
+
+    // Load projects from database
+    useEffect(() => {
+        const fetchProjects = async () => {
+            setLoading(true);
+            const data = await loadProjects();
+            setProjects(data);
+            setVisibleProjects(data);
+            setLoading(false);
+        };
+
+        fetchProjects();
+
+        // Set up real-time subscription for project updates
+        const subscription = supabase
+            .channel('projects_changes')
+            .on('postgres_changes',
+                { event: '*', schema: 'public', table: 'projects' },
+                (payload) => {
+                    console.log('Project updated!', payload);
+                    fetchProjects(); // Reload projects when database changes
+                }
+            )
+            .subscribe();
+
+        return () => {
+            subscription.unsubscribe();
+        };
+    }, []);
+
+    // Calculate categories from loaded projects
+    const categories = ["All", ...Array.from(new Set(projects.map(p => p.category)))];
 
     useEffect(() => {
         setAnimating(true);
@@ -119,7 +70,7 @@ const Projects = () => {
             }
             setAnimating(false);
         }, 300);
-    }, [filter]);
+    }, [filter, projects]);
 
     useEffect(() => {
         const handleMouseMove = (e) => {
@@ -143,6 +94,14 @@ const Projects = () => {
             if (container) container.removeEventListener('mousemove', handleMouseMove);
         };
     }, [visibleProjects]);
+
+    if (loading) {
+        return (
+            <div className="projects-container">
+                <h1 className="projects-title">Loading Projects...</h1>
+            </div>
+        );
+    }
 
     return (
         <div className="projects-container">
@@ -168,7 +127,7 @@ const Projects = () => {
             <div className={`projects-grid ${animating ? 'fade-out' : 'fade-in'}`}>
                 {visibleProjects.map((project, index) => (
                     <div
-                        key={project.title} // Use title as key for stability during filtering
+                        key={project.id || project.title}
                         className="project-card"
                         ref={el => cardsRef.current[index] = el}
                     >
@@ -191,7 +150,7 @@ const Projects = () => {
                         <div className="project-links">
                             {project.link && (
                                 <a href={project.link} target="_blank" rel="noopener noreferrer" className="project-link">
-                                    {project.linkText || "Live Demo"} <span>↗</span>
+                                    {project.link_text || "Live Demo"} <span>↗</span>
                                 </a>
                             )}
                         </div>
