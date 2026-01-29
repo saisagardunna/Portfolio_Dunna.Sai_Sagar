@@ -91,6 +91,6 @@ ${p.link ? `[View Live Demo](${p.link})` : 'No live demo available'}
         res.status(200).json({ ok: true });
     } catch (error) {
         console.error('Error processing Telegram update:', error);
-        res.status(500).json({ error: 'Internal server error' });
+        res.status(500).json({ error: error.message, stack: error.stack });
     }
 };
