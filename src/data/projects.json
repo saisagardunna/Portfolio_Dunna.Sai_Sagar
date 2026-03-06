@@ -171,5 +171,108 @@
             "Created an innovative browser-based fighting game controlled via webcam hand gestures",
             "Implemented real-time motion tracking to map physical punches and blocks to in-game actions"
         ]
+    },
+    {
+        "title": "Blog Platform",
+        "tech": [
+            "React",
+            "Node.js"
+        ],
+        "category": "Web Dev",
+        "link": "https://blog-project-client-five.vercel.app/",
+        "keywords": [
+            "blog",
+            "blog platform",
+            "posts",
+            "articles"
+        ],
+        "description": [
+            "A clean, modern blogging platform where users can create, publish, and share posts",
+            "Features a minimal UI focused on reading experience and content discovery"
+        ]
+    },
+    {
+        "title": "Shared Sound System",
+        "tech": [
+            "React",
+            "WebRTC",
+            "Audio API"
+        ],
+        "category": "Web Dev",
+        "link": "https://app-six-kappa-30.vercel.app/",
+        "keywords": [
+            "sound system",
+            "music sharing",
+            "listen together",
+            "shared music"
+        ],
+        "description": [
+            "Real-time music sharing app that lets friends listen to songs together simultaneously",
+            "Synchronized audio playback across multiple devices for a shared listening experience"
+        ]
+    },
+    {
+        "title": "ThreatNet – Cybersecurity Detector",
+        "tech": [
+            "React",
+            "NLP",
+            "AI"
+        ],
+        "category": "AI/ML",
+        "link": "https://threat-net-jo5s.vercel.app/",
+        "keywords": [
+            "threatnet",
+            "cybersecurity",
+            "threat detection",
+            "fake message",
+            "phishing"
+        ],
+        "description": [
+            "AI-powered cybersecurity tool that analyzes messages and detects whether they are genuine or fake threats",
+            "Helps users identify phishing attempts, scam messages, and malicious content in real time"
+        ]
+    },
+    {
+        "title": "Fraud Detection Bot",
+        "tech": [
+            "Python",
+            "Hugging Face",
+            "ML"
+        ],
+        "category": "AI/ML",
+        "link": "https://sagar142-fraud-detection-bot.hf.space/",
+        "keywords": [
+            "fraud detection",
+            "transaction fraud",
+            "fake transaction",
+            "fraud bot"
+        ],
+        "description": [
+            "Machine learning bot that predicts whether a financial transaction is fraudulent or legitimate",
+            "Deployed on Hugging Face Spaces for easy access and real-time inference"
+        ]
+    },
+    {
+        "title": "KnowEmp – Employee & Student Daily Tracker",
+        "tech": [
+            "React",
+            "Vercel",
+            "Database"
+        ],
+        "category": "Web Dev",
+        "link": "https://know-emp1.vercel.app/",
+        "keywords": [
+            "knowemp",
+            "employee tracker",
+            "student tracker",
+            "daily activity",
+            "attendance",
+            "work log"
+        ],
+        "description": [
+            "Platform for storing and tracking employee and student daily activities and progress",
+            "Enables managers and educators to monitor what each person worked on each day",
+            "Built for easy daily data entry and retrieval of work/study logs"
+        ]
     }
 ]

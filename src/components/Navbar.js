@@ -36,7 +36,8 @@ const Navbar = () => {
         { name: 'Contact', path: '/contact' },
         { name: 'Community', path: '/chat' },
         { name: 'Certificates', path: '/gallery' },
-        { name: 'Resume', path: '/resume' }
+        { name: 'Resume', path: '/resume' },
+        { name: 'Task', path: '/tasks' }
     ];
 
     const socials = [

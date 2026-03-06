@@ -16,6 +16,7 @@ import Footer from "./components/Footer";
 import ScrollProgress from "./components/ScrollProgress";
 import BackToTop from "./components/BackToTop";
 import CustomCursor from "./components/CustomCursor";
+import TaskDashboard from "./components/TaskDashboard";
 import Terminal from "./components/Terminal";
 import TelegramNavigationListener from "./components/TelegramNavigationListener";
 import "./styles/main.css";
@@ -260,6 +261,7 @@ export default function App() {
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/resume" element={<ResumeViewer />} />
+        <Route path="/tasks" element={<TaskDashboard />} />
       </Routes>
       <AIAssistant />
       <BackToTop />

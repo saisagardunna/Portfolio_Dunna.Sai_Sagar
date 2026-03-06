@@ -1,0 +1,86 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+@layer base {
+  :root {
+    --background: 2 11% 5%;
+    --foreground: 210 40% 96%;
+    --card: 217 32% 17%;
+    --card-foreground: 210 40% 96%;
+    --popover: 217 32% 17%;
+    --popover-foreground: 210 40% 96%;
+    --primary: 47 100% 56%;
+    --primary-foreground: 2 11% 5%;
+    --secondary: 217 32% 26%;
+    --secondary-foreground: 210 40% 96%;
+    --muted: 217 32% 26%;
+    --muted-foreground: 210 15% 57%;
+    --accent: 47 100% 56%;
+    --accent-foreground: 2 11% 5%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 96%;
+    --border: 217 32% 26%;
+    --input: 217 32% 22%;
+    --ring: 47 100% 56%;
+    --chart-1: 47 100% 56%;
+    --chart-2: 170 76% 40%;
+    --chart-3: 260 80% 56%;
+    --chart-4: 10 86% 61%;
+    --chart-5: 200 80% 50%;
+    --radius: 0.5rem;
+    --sidebar-background: 217 32% 17%;
+    --sidebar-foreground: 210 40% 96%;
+    --sidebar-primary: 47 100% 56%;
+    --sidebar-primary-foreground: 2 11% 5%;
+    --sidebar-accent: 217 32% 26%;
+    --sidebar-accent-foreground: 210 40% 96%;
+    --sidebar-border: 217 32% 22%;
+    --sidebar-ring: 47 100% 56%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+@layer components {
+  .task-card {
+    @apply bg-card rounded-lg p-4 shadow-lg border border-border/50 hover:border-accent/50 transition-all duration-200;
+  }
+  
+  .kanban-column {
+    @apply flex flex-col gap-4 bg-secondary/20 rounded-lg p-4 min-h-96 border border-border/30;
+  }
+  
+  .ai-button {
+    @apply bg-accent text-accent-foreground hover:bg-accent/90 transition-colors;
+  }
+  
+  .notification-item {
+    @apply bg-card border-l-2 border-accent rounded-md p-3 animate-in slide-in-from-top-2;
+  }
+  
+  .drag-overlay {
+    @apply opacity-50 scale-105 shadow-2xl;
+  }
+  
+  .calendar-day {
+    @apply hover:bg-accent/20 cursor-pointer transition-colors;
+  }
+}

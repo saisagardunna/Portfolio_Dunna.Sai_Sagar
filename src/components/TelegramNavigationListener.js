@@ -8,8 +8,10 @@ const SUPABASE_KEY = process.env.VITE_SUPABASE_ANON_KEY || 'eyJhbGciOiJIUzI1NiIs
 const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
 
 /**
- * TelegramNavigationListener - Listen for navigation commands from Telegram bot
- * This component subscribes to the navigation_commands table and navigates accordingly
+ * TelegramNavigationListener
+ * Subscribes to navigation_commands table and:
+ * - Navigates to a route when command = page name
+ * - Opens a URL in new tab when command = 'open_project'
  */
 const TelegramNavigationListener = () => {
     const navigate = useNavigate();
@@ -17,39 +19,36 @@ const TelegramNavigationListener = () => {
     useEffect(() => {
         console.log('🤖 Telegram Navigation Listener initialized');
 
-        // Subscribe to realtime changes in navigation_commands table
         const channel = supabase
             .channel('navigation-commands')
             .on(
                 'postgres_changes',
-                {
-                    event: 'INSERT',
-                    schema: 'public',
-                    table: 'navigation_commands'
-                },
+                { event: 'INSERT', schema: 'public', table: 'navigation_commands' },
                 (payload) => {
-                    console.log('📱 Received navigation command:', payload);
+                    console.log('📱 Telegram command received:', payload.new);
 
-                    const command = payload.new.command;
+                    const command    = payload.new.command;
                     const projectUrl = payload.new.project_url;
 
-                    // Handle special command: open_project
+                    // Open a project in a new tab
                     if (command === 'open_project' && projectUrl) {
                         console.log(`🚀 Opening project: ${projectUrl}`);
                         window.open(projectUrl, '_blank');
+                        showToastBanner('🚀 Opening project from Telegram!');
                         return;
                     }
 
-                    // Map commands to routes
+                    // Page navigation
                     const routeMap = {
-                        'home': '/',
-                        'projects': '/projects',
-                        'contact': '/contact',
-                        'resume': '/resume',
-                        'gallery': '/gallery',
+                        'home':        '/',
+                        'projects':    '/projects',
+                        'contact':     '/contact',
+                        'resume':      '/resume',
+                        'gallery':     '/gallery',
                         'certificate': '/gallery',
-                        'about': '/about',
-                        'chat': '/chat'
+                        'about':       '/about',
+                        'chat':        '/chat',
+                        'tasks':       '/tasks',
                     };
 
                     const route = routeMap[command.toLowerCase()];
@@ -57,29 +56,55 @@ const TelegramNavigationListener = () => {
                     if (route) {
                         console.log(`🧭 Navigating to: ${route}`);
                         navigate(route);
-
-                        // Optional: Show a toast notification
-                        if (typeof window !== 'undefined' && window.showToast) {
-                            window.showToast(`Navigated to ${command} via Telegram`);
-                        }
+                        showToastBanner(`📱 Navigated to ${command} via Telegram`);
                     } else {
-                        console.warn(`⚠️ Unknown navigation command: ${command}`);
+                        console.warn(`⚠️ Unknown command: ${command}`);
                     }
                 }
             )
             .subscribe((status) => {
-                console.log('📡 Subscription status:', status);
+                console.log('📡 Telegram Listener status:', status);
+                if (status === 'SUBSCRIBED') {
+                    console.log('✅ Ready — Telegram can now control this browser!');
+                } else if (status === 'CHANNEL_ERROR') {
+                    console.error('❌ Realtime failed — check Supabase realtime & fix-navigation-table.sql');
+                }
             });
 
-        // Cleanup on unmount
         return () => {
-            console.log('🔌 Unsubscribing from navigation commands');
+            console.log('🔌 Unsubscribing Telegram Navigation Listener');
             supabase.removeChannel(channel);
         };
     }, [navigate]);
 
-    // This component doesn't render anything
     return null;
 };
+
+// Floating toast banner shown when Telegram triggers an action
+function showToastBanner(message) {
+    const el = document.createElement('div');
+    el.innerText = message;
+    Object.assign(el.style, {
+        position:   'fixed',
+        top:        '20px',
+        left:       '50%',
+        transform:  'translateX(-50%)',
+        background: 'linear-gradient(135deg, #06b6d4, #8b5cf6)',
+        color:      '#fff',
+        padding:    '12px 28px',
+        borderRadius: '30px',
+        fontFamily: 'Inter, sans-serif',
+        fontSize:   '14px',
+        fontWeight: '600',
+        boxShadow:  '0 8px 32px rgba(6,182,212,0.5)',
+        zIndex:     '99999',
+        transition: 'opacity 0.5s',
+        opacity:    '1',
+        whiteSpace: 'nowrap',
+    });
+    document.body.appendChild(el);
+    setTimeout(() => { el.style.opacity = '0'; }, 2500);
+    setTimeout(() => { el.remove(); }, 3100);
+}
 
 export default TelegramNavigationListener;
